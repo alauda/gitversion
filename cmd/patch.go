@@ -16,6 +16,8 @@ package cmd
 
 import (
 	"fmt"
+	"os"
+	"strings"
 
 	"github.com/alauda/gitversion/pkg"
 	"github.com/spf13/cobra"
@@ -30,8 +32,30 @@ var patchCmd = &cobra.Command{
 	 this tool will return v0.1.3 as output.
 	`,
 	Run: func(cmd *cobra.Command, args []string) {
+		if len(args) != 1 {
+			fmt.Println(`please provide a minor version number to generate patch number. e.g: v0.1`)
+			os.Exit(1)
+			return
+		}
+		version := args[0]
 		tags, err := pkg.GetAllTags()
-		fmt.Println("tags", tags, "err", err)
+		if err != nil {
+			fmt.Println("an error occurred while fetching tags:", err)
+			os.Exit(1)
+			return
+		}
+		if len(tags) == 0 || (len(tags) == 1 && tags[0] == version) {
+			fmt.Println(fmt.Sprintf("%v.0", version))
+			return
+		}
+		tags = pkg.FilterTags(version, tags, strings.HasPrefix)
+		if len(tags) == 0 || (len(tags) == 1 && tags[0] == version) {
+			fmt.Println(fmt.Sprintf("%v.0", version))
+			return
+		}
+		highest := pkg.GetHighestPatch(tags)
+		highest++
+		fmt.Println(fmt.Sprintf("%v.%d", version, highest))
 	},
 }
 
