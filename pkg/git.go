@@ -38,9 +38,12 @@ func FilterTags(condition string, tags []string, filter func(string, string) boo
 }
 
 // GetHighestPatch return the highest patch number from all tags
-func GetHighestPatch(tags []string) int {
+func GetHighestPatch(tags []string, transform ...func(string) string) int {
 	numbers := make([]int, 0, len(tags))
 	for _, t := range tags {
+		for _, trans := range transform {
+			t = trans(t)
+		}
 		spl := strings.Split(t, ".")
 
 		num, err := strconv.Atoi(spl[len(spl)-1])
