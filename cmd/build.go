@@ -28,8 +28,7 @@ var buildCmd = &cobra.Command{
 	Use:   "build",
 	Short: "generates a build version number based on a given minor version",
 	Long: `for example: given the following git tags:
-	 v0.1, v0.1.b-1, v0.1.2  if v0.1 is given as argument
-	 this tool will return v0.1.b-2 as output.
+	 v0.1, v0.1.b-1, v0.1.2  if v0.1 is given as argument will print v0.1.b-2 as output.
 	`,
 	Run: func(cmd *cobra.Command, args []string) {
 		if len(args) != 1 {

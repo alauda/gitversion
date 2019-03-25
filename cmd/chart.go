@@ -27,11 +27,11 @@ var chartCmd = &cobra.Command{
 	Use:   "chart",
 	Short: "generates a new version number for a chart based on a current version and a given minor version",
 	Long: `usage: gitversion <chart current version> <target minor version>
-	example1: gitversion v0.1.2 v0.2 > in this case it would return v0.2.0
-	example2: gitversion v0.1.2 v0.1 > v0.1.3
-	example3: gitversion v0.1.2 v0.1.3 > v0.1.3
-	example4: gitversion v0.1.2 v0.1.2 > v0.1.2
-	example5: gitversion v0.1.2 v0.1.0 > v0.1.3 
+	example1: gitversion chart v0.1.2 v0.2 will print v0.2.0
+	example2: gitversion chart v0.1.2 v0.1 will print v0.1.3
+	example3: gitversion chart v0.1.2 v0.1.3 will print v0.1.3
+	example4: gitversion chart v0.1.2 v0.1.2 will print v0.1.2
+	example5: gitversion chart v0.1.2 v0.1.0 will print v0.1.3 
 	`,
 	Run: func(cmd *cobra.Command, args []string) {
 		if len(args) != 2 && len(args) != 1 {
