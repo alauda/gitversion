@@ -17,7 +17,7 @@ func GenReleaseCandidate(args []string) (version string, err error) {
 	return
 }
 
-var rcRegex = regexp.MustCompile(`v(\d+)\.(\d+|\d+\-rc)\.(\d+)`)
+var rcRegex = regexp.MustCompile(`v(\d+)\.(\d+|\d+\-[a-zA-Z]+)\.(\d+)`)
 var majorMinorRegex = regexp.MustCompile(`v(\d+)\.(\d+)`)
 
 func GenRC(current, desired string) (result string, err error) {

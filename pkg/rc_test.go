@@ -37,6 +37,13 @@ func TestRCVersion(t *testing.T) {
 			"v0.1-rc.2",
 			nil,
 		},
+		{
+			"current is build",
+			"v0.1-b.1",
+			"v0.1",
+			"v0.1-rc.0",
+			nil,
+		},
 	}
 
 	for i, test := range table {
