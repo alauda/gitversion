@@ -1,4 +1,4 @@
-// Copyright © 2018 NAME HERE <EMAIL ADDRESS>
+// Copyright © 2019 NAME HERE <EMAIL ADDRESS>
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -22,31 +22,27 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var inplace bool
+// rcCmd represents the rc command
+var rcCmd = &cobra.Command{
+	Use:   "rc",
+	Short: "A brief description of your command",
+	Long: `A longer description that spans multiple lines and likely contains examples
+and usage of using your command. For example:
 
-// buildCmd represents the patch command
-var buildCmd = &cobra.Command{
-	Use:   "build",
-	Short: "generates a build version number based on a given minor version",
-	Long: `for example: given the following git tags:
-	 v0.1, v0.1.b-1, v0.1.2  if v0.1 is given as argument will print v0.1.b-2 as output.
-	`,
+Cobra is a CLI library for Go that empowers applications.
+This application is a tool to generate the needed files
+to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		implementation := pkg.BuildGit
-		if inplace {
-			implementation = pkg.BuildInplace
-		}
-		result, err := implementation(args)
+		version, err := pkg.GenReleaseCandidate(args)
 		if err != nil {
 			fmt.Println(err.Error())
 			os.Exit(1)
+			return
 		}
-		fmt.Println(result)
+		fmt.Println(version)
 	},
 }
 
 func init() {
-	rootCmd.AddCommand(buildCmd)
-
-	buildCmd.Flags().BoolVarP(&inplace, "inplace", "i", false, "if added will not use the git repository as reference but only the given arguments")
+	rootCmd.AddCommand(rcCmd)
 }
