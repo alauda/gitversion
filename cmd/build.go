@@ -36,7 +36,7 @@ var buildCmd = &cobra.Command{
 		if inplace {
 			implementation = pkg.BuildInplace
 		}
-		result, err := implementation(args)
+		result, err := implementation(args, pkg.GetAllTags)
 		if err != nil {
 			fmt.Println(err.Error())
 			os.Exit(1)
