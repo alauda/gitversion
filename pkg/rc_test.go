@@ -44,6 +44,13 @@ func TestRCVersion(t *testing.T) {
 			"v0.1-rc.0",
 			nil,
 		},
+		{
+			"current is partial or invalid",
+			"v2.1",
+			"v2.2",
+			"v2.2-rc.0",
+			nil,
+		},
 	}
 
 	for i, test := range table {

@@ -23,7 +23,7 @@ var majorMinorRegex = regexp.MustCompile(`v(\d+)\.(\d+)`)
 func GenRC(current, desired string) (result string, err error) {
 	//
 	if !rcRegex.MatchString(current) {
-		err = fmt.Errorf("Current \"%s\" should be either a specific version (v0.1.2) or an rc version (v0.1-rc.0)", current)
+		result = fmt.Sprintf("%s-rc.0", desired)
 		return
 	}
 	if !majorMinorRegex.MatchString(desired) {
