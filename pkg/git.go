@@ -1,6 +1,7 @@
 package pkg
 
 import (
+	"fmt"
 	"os/exec"
 	"sort"
 	"strconv"
@@ -56,4 +57,21 @@ func GetHighestPatch(tags []string, transform ...func(string) string) int {
 		return numbers[len(numbers)-1]
 	}
 	return -1
+}
+
+// GitDescribe describe a git using given arguments
+func GitDescribe(arguments ...string) (version string, err error) {
+	var data []byte
+	data, err = exec.Command("git",
+		append(
+			[]string{"describe"},
+			arguments...,
+		)...,
+	).CombinedOutput()
+	if err != nil {
+		fmt.Println("error", string(data))
+		return
+	}
+	version = strings.ReplaceAll(string(data), "\n", "")
+	return
 }
