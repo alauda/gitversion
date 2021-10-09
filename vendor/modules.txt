@@ -1,0 +1,22 @@
+# github.com/blang/semver v3.5.1+incompatible
+## explicit
+github.com/blang/semver
+# github.com/cpuguy83/go-md2man v1.0.10
+## explicit
+github.com/cpuguy83/go-md2man/md2man
+# github.com/inconshreveable/mousetrap v1.0.0
+## explicit
+github.com/inconshreveable/mousetrap
+# github.com/russross/blackfriday v1.5.3-0.20190124082335-a477dd164691
+## explicit
+github.com/russross/blackfriday
+# github.com/spf13/cobra v0.0.3
+## explicit
+github.com/spf13/cobra
+github.com/spf13/cobra/doc
+# github.com/spf13/pflag v1.0.3
+## explicit
+github.com/spf13/pflag
+# gopkg.in/yaml.v2 v2.1.1
+## explicit
+gopkg.in/yaml.v2

@@ -24,6 +24,22 @@ func GetAllTags() (tags []string, err error) {
 	return
 }
 
+// GetAllBranches list all branches in the current directory
+func GetAllBranches() (branches []string, err error) {
+	var output []byte
+	if output, err = exec.Command("ls", ".git/refs/heads").CombinedOutput(); err != nil {
+		return
+	}
+	text := string(output)
+	branches = strings.Split(text, "\n")
+	for i := 0; i < len(branches); i++ {
+		if branches[i] == "" {
+			branches = append(branches[:i], branches[i+1:]...)
+		}
+	}
+	return
+}
+
 // FilterTags filter a tag list based on a condition and a filter function
 func FilterTags(condition string, tags []string, filter func(string, string) bool) (res []string) {
 	if len(tags) == 0 || len(condition) == 0 {
